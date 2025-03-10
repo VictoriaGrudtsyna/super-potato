@@ -15,7 +15,7 @@ void edit_Profile(Database_Handler &db, int patient_id);
  * @param db Объект базы данных.
  * @param patient_id ID пациента.
  */
-void patient_Menu(Database_Handler &db, int patient_id);
+// void patient_Menu(Database_Handler &db, int patient_id);
 
 /**
  * @brief Обрабатывает регистрацию пользователя.

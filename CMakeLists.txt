@@ -15,7 +15,6 @@ add_executable(boost_api_server ${SOURCES})
 target_link_libraries(boost_api_server 
     PRIVATE
     ${Boost_LIBRARIES}
-    bcrypt 
     ${PostgreSQL_LIBRARIES}
     OpenSSL::Crypto
 )

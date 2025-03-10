@@ -9,7 +9,6 @@
 #include <iomanip>
 #include <random>
 #include <iostream>
-
 #include <sstream>
 #include <stdexcept>
 
