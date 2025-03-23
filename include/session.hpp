@@ -1,31 +1,31 @@
-#ifndef SESSION_HPP
-#define SESSION_HPP
+#ifndef SESSION_HPP_
+#define SESSION_HPP_
 
-#include <boost/beast/core.hpp>
-#include <boost/beast/http.hpp>
+#include "database.hpp"
 #include <boost/asio.hpp>
-#include <boost/asio/ip/tcp.hpp>
+#include <boost/beast.hpp>
 #include <memory>
 
 namespace beast = boost::beast;
-namespace http = beast::http;
+namespace http = boost::beast::http;
+namespace net = boost::asio;
 using tcp = boost::asio::ip::tcp;
 
-class Session : public std::enable_shared_from_this<Session> {
+class session : public std::enable_shared_from_this<session> {
+public:
+    session(tcp::socket socket, database_handler &db_handler);
+    void start();
+
+private:
     tcp::socket socket_;
+    database_handler &db_handler_;
     beast::flat_buffer buffer_;
     http::request<http::string_body> request_;
     http::response<http::string_body> response_;
 
-public:
-    explicit Session(tcp::socket socket);
-
-    void start();
-
-private:
     void read_request();
     void process_request();
     void write_response();
 };
 
-#endif
+#endif  // SESSION_HPP_

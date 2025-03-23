@@ -1,7 +1,7 @@
-#ifndef SERVER_HPP
-#define SERVER_HPP
+#ifndef SERVER_HPP_
+#define SERVER_HPP_
 
-#pragma once
+#include "database.hpp"
 #include <boost/asio.hpp>
 #include <boost/beast.hpp>
 #include <memory>
@@ -9,17 +9,23 @@
 namespace http = boost::beast::http;
 using tcp = boost::asio::ip::tcp;
 
-class Session;
+class session;
 
-class Server {
+class server {
 public:
-    Server(boost::asio::io_context& io_context, short port);
-
+    server(
+        boost::asio::io_context &io_context,
+        short port,
+        database_handler &db_handler
+    );
+    void run_server();
+    
 private:
     void accept();
 
-    boost::asio::io_context& io_context_;
+    boost::asio::io_context &io_context_;
     tcp::acceptor acceptor_;
+    database_handler &db_handler;
 };
 
-#endif // SERVER_HPP
+#endif  // SERVER_HPP_
